@@ -1,0 +1,3 @@
+[submodule "OpenWeatherTest"]
+	path = OpenWeatherTest
+	url = https://github.com/nbourre/OpenWeatherTest.git

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WeatherApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "DEVELOPMENT"
+      }
+    }
+  }
+}

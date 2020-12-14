@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="WeatherApp.Views.TemperatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeatherApp.Views"
+             xmlns:models="clr-namespace:WeatherApp.Models"
+             xmlns:p="clr-namespace:WeatherApp.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="400">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <TextBlock Text="{x:Static p:Resources.Text_City}"/>
+            <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+        </ToolBar>
+
+
+        <Button DockPanel.Dock="Top" Content="{x:Static p:Resources.Btn_GetTemp}" Command="{Binding GetTempCommand}"/>
+
+        
+        <ListView ItemsSource="{Binding Temperatures}" SelectedItem="{Binding CurrentTemp}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:TemperatureModel}">
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid Width="250">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="City : "/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Date : "/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Temperature : " Panel.ZIndex="7"/>
+
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding City,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DateTime,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Temperature,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </DockPanel>
+</UserControl>

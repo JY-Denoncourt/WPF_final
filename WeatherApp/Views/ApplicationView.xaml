@@ -1,0 +1,43 @@
+﻿<Window x:Class="WeatherApp.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherApp"
+        xmlns:views="clr-namespace:WeatherApp.Views"
+        xmlns:models="clr-namespace:WeatherApp.ViewModels"
+        xmlns:p="clr-namespace:WeatherApp.Properties"
+        mc:Ignorable="d"
+        Title="My Weather Station" Height="450" Width="400">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type models:TemperatureViewModel}">
+            <views:TemperatureView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type models:ConfigurationViewModel}">
+            <views:ConfigurationView/>
+        </DataTemplate>
+        <Style x:Key="allMargins">
+            <Setter Property="Control.Margin" Value="3"/>
+        </Style>
+        <Style BasedOn="{StaticResource allMargins}" TargetType="{x:Type Button}"/>
+        <Style BasedOn="{StaticResource allMargins}" TargetType="{x:Type TextBlock}"/>
+        <Style BasedOn="{StaticResource allMargins}" TargetType="{x:Type TextBox}"/>
+    </Window.Resources>
+    
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="{x:Static p:Resources.Menu_WeatherStation}" Command="{Binding ChangePageCommand}" CommandParameter="TemperatureViewModel"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_Preference}" Command="{Binding ChangePageCommand}" CommandParameter="ConfigurationViewModel"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_Export}" Command="{Binding ExportCommand}" CommandParameter="ConfigurationViewModel"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_Import}" Command="{Binding ImportCommand}" CommandParameter="ConfigurationViewModel"/>
+                <MenuItem Header="{x:Static p:Resources.Menu_Language}">
+                    <MenuItem Header="Francais" Command="{Binding LanguageCommand}" CommandParameter="fr"/>
+                    <MenuItem Header="Anglais" Command="{Binding LanguageCommand}" CommandParameter="en"/>
+                </MenuItem>
+                <Separator />
+            </MenuItem>
+        </Menu>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </DockPanel>
+</Window>
